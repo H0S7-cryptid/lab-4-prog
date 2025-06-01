@@ -23,8 +23,8 @@ void TotalDiscip::addDisc(Discipline d) {
 	uniqueDisc();
 }
 
-void TotalDiscip::addDisc(short TCU, std::string name) {
-	disciplines.push_back(Discipline{ TCU, name });
+void TotalDiscip::addDisc(short TCU, std::string name, LvlOfEdu lvl) {
+	disciplines.push_back(Discipline{ TCU, name, lvl });
 	uniqueDisc();
 }
 
@@ -57,9 +57,12 @@ void TotalDiscip::redoDiscName(std::string name, int pos) {
 	disciplines[pos].setDName(name);
 }
 
-Discipline TotalDiscip::search(Discipline d) {
-	Discipline seek;
+void TotalDiscip::redoDisclvl(LvlOfEdu lvl, int pos) {
+	if (pos > disciplines.size()) throw std::out_of_range("Position is beyond range!");
+	disciplines[pos].setLvl(lvl);
+}
 
+Discipline TotalDiscip::search(Discipline d) {
 	for (const Discipline& find : disciplines) {
 
 		std::string name = find.getDiscName();
@@ -72,14 +75,11 @@ Discipline TotalDiscip::search(Discipline d) {
 		if (CCU != CCU_to_find) 
 			continue;
 
-		seek = find;
+		return find;
 	}
-	return seek;
 }
 
 Discipline TotalDiscip::search(short CCU, std::string name) {
-	Discipline seek;
-
 	for (const Discipline& find : disciplines) {
 		if ((name != find.getDiscName()) || (name.empty() || find.getDiscName().empty()))
 			continue;
@@ -87,7 +87,6 @@ Discipline TotalDiscip::search(short CCU, std::string name) {
 		if (CCU != find.getCurrentCU())
 			continue;
 
-		seek = find; 
+		return find;
 	}
-	return seek; 
 }
