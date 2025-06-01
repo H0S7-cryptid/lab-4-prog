@@ -25,6 +25,7 @@ void CompOfCreators::deleteCreator(const Person& name, StatusInUni& status) {
 }
 
 void CompOfCreators::deleteCreator(int pos) {
+	if (pos > creators.size()) throw std::out_of_range("Position is beyond range!");
 	auto it = creators.begin();
 	std::advance(it, pos);
 	creators.erase(it);
