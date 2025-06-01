@@ -56,4 +56,3 @@ CompOfCreators& CompOfCreators::operator=(const CompOfCreators& other) {
 	}
 	return *this;
 }
-
