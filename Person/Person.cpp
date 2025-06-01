@@ -44,17 +44,17 @@ bool Person::operator<(const Person& other) const {
 }
 
 void Person::setFname(std::string name) {
-	if (!tryName(name)) return;
+	if (!tryName(name)) throw std::exception("Wrong name!");
 	fname = name;
 }
 
 void Person::setMname(std::string name) {
-	if (!tryName(name)) return;
+	if (!tryName(name)) throw std::exception("Wrong name!");
 	mname = name;
 }
 
 void Person::setLname(std::string name) {
-	if (!tryName(name)) return;
+	if (!tryName(name)) throw std::exception("Wrong name!");
 	lname = name;
 }
 
