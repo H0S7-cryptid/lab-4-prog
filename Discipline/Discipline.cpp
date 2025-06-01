@@ -9,9 +9,9 @@ bool Discipline::tryName(std::string n) {
 	return true;
 }
 
-Discipline::Discipline() : CCU{ 0 }, discName{ "Unknown" } {}
+Discipline::Discipline() : CCU{ 0 }, discName{ "Unknown" }, lvl{UNDEFL} {}
 
-Discipline::Discipline(short CCU, std::string discName) {
+Discipline::Discipline(short CCU, std::string discName, LvlOfEdu lvl) {
 	if (tryName(discName)) {
 		this->discName = discName;
 	}
@@ -19,6 +19,7 @@ Discipline::Discipline(short CCU, std::string discName) {
 		this->discName = "Unknown";
 	}
 	this->CCU = CCU;
+	this->lvl = lvl; 
 }
 
 Discipline& Discipline::operator=(const Discipline& d) {
@@ -47,10 +48,19 @@ std::string Discipline::getDiscName() const {
 	return discName;
 }
 
+LvlOfEdu Discipline::getLvl() const {
+	return lvl;
+}
+
 void Discipline::setCurrentCU(short ccu) {
 	CCU = ccu;
 }
 
 void Discipline::setDName(std::string name) {
-	discName = name;
+	if (tryName(name)) discName = name;
+	else return;
+}
+
+void Discipline::setLvl(LvlOfEdu l) {
+	lvl = l;
 }
