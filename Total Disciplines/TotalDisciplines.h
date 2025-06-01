@@ -16,7 +16,7 @@ public:
 
 	// Методы добавления элементов в контейнер
 	void addDisc(Discipline d);
-	void addDisc(short TCU, std::string name);
+	void addDisc(short TCU, std::string name, LvlOfEdu lvl);
 
 	// Метод проверки элементов контейнера на уникальность
 	bool uniqueDisc();
@@ -27,6 +27,7 @@ public:
 	// Установка полей 
 	void redoDiscCCU(short ccu, int pos);
 	void redoDiscName(std::string name, int pos);
+	void redoDisclvl(LvlOfEdu lvl, int pos);
 
 	// Поиск существующих дисциплин
 	Discipline search(Discipline d);
