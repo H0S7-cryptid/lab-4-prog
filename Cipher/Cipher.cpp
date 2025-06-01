@@ -21,34 +21,44 @@ bool Cipher::isNum(std::string s) {
 Cipher::Cipher() :pt1{ "00" }, pt2{ "00" }, pt3{ "00" } {}
 
 Cipher::Cipher(std::string p1, std::string p2, std::string p3) {
-	this->setParts(p1, p2, p3);
+	try {
+		setParts(p1, p2, p3);
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 }
 
 Cipher::Cipher(std::string full) {
-	setFullCipher(full);
+	try {
+		setFullCipher(full);
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 }
 
 void Cipher::setParts(std::string p1, std::string p2, std::string p3) {
-	if (!(isNum(p1) && isNum(p2) && isNum(pt3))) return;
+	if (!(isNum(p1) && isNum(p2) && isNum(pt3))) throw std::exception("Wrong cipher code!");
 
 	if ((p1.size() > 2 || p1.size() == 0) &&
 		(p2.size() > 2 || p2.size() == 0) &&
 		(p3.size() > 2 || p3.size() == 0)) {
 		pt1 = "00"; pt2 = "00"; pt3 = "00";
-		return;
+		throw std::exception("Wrong length of cipher parts!");
 	}
 
 	if (p1.size() > 2 || p1.size() == 0) {
 		pt1 = "00";
-		return;
+		throw std::exception("1-st part of cipher is wrong!");
 	}
 	else if (p2.size() > 2 || p2.size() == 0) {
 		pt2 = "00";
-		return;
+		throw std::exception("2-nd part of cipher is wrong!");
 	}
 	else if (p3.size() > 2 || p3.size() == 0) {
 		pt3 = "00";
-		return;
+		throw std::exception("3-rd part of cipher is wrong!");
 	}
 
 	pt1 = p1;
@@ -68,6 +78,7 @@ void Cipher::setFullCipher(std::string cipher) {
 	}
 	else {
 		pt1 = "00"; pt2 = "00"; pt3 = "00";
+		throw std::exception("Wrong cipher code!");
 	}
 }
 
